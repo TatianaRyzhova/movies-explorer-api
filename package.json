@@ -1,0 +1,35 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint .",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TatianaRyzhova/movies-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "Tatiana Ryzhova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TatianaRyzhova/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/TatianaRyzhova/movies-explorer-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
