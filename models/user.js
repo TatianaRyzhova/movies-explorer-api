@@ -24,10 +24,10 @@ const userSchema = new mongoose.Schema({
     minlength: [8, 'Password must be at least 8 characters'],
     select: false,
   },
-}, {versionKey: false});
+}, { versionKey: false });
 
 userSchema.statics.findUserByCredentials = function (email, password) {
-  return this.findOne({email}).select('+password')
+  return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
         return Promise.reject(new Error('Incorrect email or password'));
