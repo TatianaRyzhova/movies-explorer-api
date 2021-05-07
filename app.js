@@ -6,6 +6,7 @@ const { errors } = require('celebrate');
 const router = require('./routes');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const { userCreateValidation, loginValidation } = require('./middlewares/validations');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/notFoundError');
 
@@ -27,8 +28,8 @@ app.use(bodyParser.json());
 
 app.use(requestLogger);
 
-app.post('/signin', login);
-app.post('/signup', createUser);
+app.post('/signin', loginValidation, login);
+app.post('/signup', userCreateValidation, createUser);
 
 app.use(auth);
 app.use('/users', require('./routes/users'));
