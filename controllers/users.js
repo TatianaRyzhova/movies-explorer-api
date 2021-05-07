@@ -21,6 +21,9 @@ const updateUser = (req, res, next) => {
       if (err.name === 'ValidationError' || err.kind === 'ObjectId') {
         next(new ValidationError('Invalid data transferred when editing a user'));
       }
+      if (err.code === 11000) {
+        next(new ConflictError('User with this email already exists'));
+      }
       next(err);
     });
 };
