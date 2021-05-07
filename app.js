@@ -1,18 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const router = require('./routes');
-const { createUser, login } = require('./controllers/users');
-const auth = require('./middlewares/auth');
-const { userCreateValidation, loginValidation } = require('./middlewares/validations');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const NotFoundError = require('./errors/notFoundError');
+const { limiter } = require('./middlewares/rateLimiter');
+const { serverErrorHandler } = require('./middlewares/serverErrorHandler');
 
 const { PORT = 3000 } = process.env;
+const { MONGO_DB_PROD, NODE_ENV } = process.env;
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect(NODE_ENV === 'production' ? MONGO_DB_PROD : 'mongodb://localhost:27017/bitfilmsdb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -28,31 +28,16 @@ app.use(bodyParser.json());
 
 app.use(requestLogger);
 
-app.post('/signin', loginValidation, login);
-app.post('/signup', userCreateValidation, createUser);
-
-app.use(auth);
-app.use('/users', require('./routes/users'));
-app.use('/movies', require('./routes/movies'));
+app.use(limiter);
+app.use(helmet());
 
 app.use(router);
-router.use((req, res, next) => {
-  next(new NotFoundError(`Ресурс по адресу ${req.path} не найден`));
-});
 
 app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-  res.status(statusCode).send({
-    message: statusCode === 500
-      ? 'Server error'
-      : message,
-  });
-  next();
-});
+app.use(serverErrorHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
