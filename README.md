@@ -2,6 +2,6 @@
 
 Backend: http://api.movies.tatiana.nomoredomains.icu
 
-Public IP: 84.201.180.16
+Public IP: 84.201.148.137
 
 Implemented by Tatiana Ryzhova
