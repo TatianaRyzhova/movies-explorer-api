@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { limiter } = require('./middlewares/rateLimiter');
 const { serverErrorHandler } = require('./middlewares/serverErrorHandler');
 
 const { PORT = 3000 } = process.env;
@@ -30,7 +29,6 @@ app.use(bodyParser.json());
 
 app.use(requestLogger);
 
-app.use(limiter);
 app.use(helmet());
 
 app.use(router);
