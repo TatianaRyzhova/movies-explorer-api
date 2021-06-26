@@ -58,4 +58,5 @@ npm run start
 The project will start at `http://localhost:3000/`
 
 
-Implemented by Tatiana Ryzhova
+
+:copyright: Implemented by Tatiana Ryzhova
