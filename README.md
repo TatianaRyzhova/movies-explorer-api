@@ -11,7 +11,6 @@ The server provides API for Movies-explorer project which allows:
 * user authorization
 * get information of the current user
 * search available movies
-* filter movies by duration
 * add movies to favorites
 * remove movies from favorites
 * modify user data such as name & email
