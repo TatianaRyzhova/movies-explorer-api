@@ -56,7 +56,3 @@ The project will start at `http://localhost:3000/`
 npm run start
 ```
 The project will start at `http://localhost:3000/`
-
-
-
-:copyright: Implemented by Tatiana Ryzhova
