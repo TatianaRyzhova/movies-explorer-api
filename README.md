@@ -6,7 +6,7 @@ Public IP: 84.201.148.137
 
 ## Project description:
 
-The server provides API for Movies-explorer project which allows: 
+The server provides API for the Movies-explorer project which allows: 
 * register new users
 * user authorization
 * get information of the current user
